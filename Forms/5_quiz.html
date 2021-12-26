@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+        <html lang="en" dir="ltr">
+          <head>
+            <meta charset="utf-8">
+            <title>Quiz</title>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>            <style media="screen">
+        
+            </style>
+          </head>
+          <body>
+            <h1>Quiz</h1>
+            <form action="#" method="post">
+              <fieldset>
+                <dl>
+        
+                </dl>
+                <input type="submit" value="Submit Answers" id="submit_btn">
+                <input type="reset" value="Reset Quiz" id="reset_btn">
+              </fieldset>
+            </form>
+        <script id="questionTemplate" type="text/x-handlebars-template">
+        <dt>
+          <label for="q{{id}}">{{{description}}}</label>
+        </dt>
+        <dd>
+          {{#each options}}
+            <input type="radio"
+                   id="q{{../id}}"
+                   name="q{{../id}}"
+                   value="{{this}}">{{this}}
+            </input>
+            <br>
+          {{/each}}
+        </dd>
+        </script>
+        
+        <script type="text/javascript">
+          const questions = [
+  {
+    id: 1,
+    description: "Who is the author of the <cite>Harry Potter</cite> series?",
+    options: [
+      "J.D. Salinger",
+      "Ursula K. Le Guin",
+      "J.K. Rowling",
+      "J.R.R. Tolkien",
+    ],
+  },
+  {
+    id: 2,
+    description: "What is Harry Potter's middle name?",
+    options: ["Albus", "James", "Tom", "He does not have one."],
+  },
+  {
+    id: 3,
+    description:
+      "What subjects did Albus Dumbledore teach before he became the Hogwarts headmaster?",
+    options: [
+      "Defense Against the Dark Arts and Transfiguration",
+      "Transfiguration and Potions",
+      "Defense Against the Dark Arts and Charms",
+      "None of the above",
+    ],
+  },
+  {
+    id: 4,
+    description: "What is the name of Filch's cat?",
+    options: ["Mrs Filch", "Mrs Minerva", "Mrs Sprout", "Mrs Norris"],
+  },
+];
+
+const answerKey = {
+  1: "J.K. Rowling",
+  2: "James",
+  3: "Defense Against the Dark Arts and Transfiguration",
+  4: "Mrs Norris",
+};
+
+let template = document.getElementById("questionTemplate").innerHTML;
+let questionTemplateScript = Handlebars.compile(template);
+
+const dl = document.querySelector("dl");
+
+questions.forEach((question) => {
+  let newQ = questionTemplateScript(question);
+  dl.innerHTML += newQ;
+});
+
+function getCorrectAnswer(questionID) {
+  return answerKey[questionID];
+}
+
+function getQuestionNumber(currentData) {
+  return currentData.firstElementChild.id[1];
+}
+
+function findUserAnswer(data) {
+  let inputs = data.querySelectorAll('input');
+  for (let idx = 0; idx < inputs.length; idx += 1) {
+    let input = inputs[idx];
+    if (input.checked) {
+      return input.value;
+    }
+  }
+}
+
+function resetQuiz() {
+  form.querySelectorAll("p.displayedAnswer").forEach((dd) => dd.remove());
+}
+
+let form = document.querySelector("form");
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  let questionData = form.querySelectorAll("dd");
+
+  [...questionData].forEach((dd) => {
+    let answer = document.createElement("p");
+    let selectedAnswer = findUserAnswer(dd);
+    let correctAnswer = getCorrectAnswer(getQuestionNumber(dd));
+    answer.classList.add("displayedAnswer");
+
+    if (selectedAnswer) {
+      if (correctAnswer === selectedAnswer) {
+        answer.textContent = "Correct!";
+        answer.style.backgroundColor = 'lightgreen';
+      } else {
+        answer.textContent = "Wrong! Correct Answer: " + correctAnswer;
+        answer.style.backgroundColor = 'lightcoral';
+      }
+    } else {
+      answer.textContent = "No answer chosen! Correct Answer: " + correctAnswer;
+      answer.style.backgroundColor = 'lightcoral';
+    }
+    dd.after(answer);
+  });
+
+  form.querySelector("#submit_btn").disabled = true;
+});
+
+form.addEventListener("reset", (event) => {
+  resetQuiz();
+  document.querySelector("#submit_btn").disabled = false;
+});
+
+
+    </script>
+  </body>
+</html>

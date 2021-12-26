@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rich Text Editor</title>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Rich Text Editor</h1>
+  </header>
+  <main>
+    <div id='editor'>
+      <div class='buttons'>
+        <button><i class="fas fa-bold" data-command='bold'></i></button>
+        <button><i class="fas fa-italic" data-command='italic'></i></button>
+        <button><i class="fas fa-underline" data-command='underline'></i></button>
+        <button><i class="fas fa-strikethrough" data-command='strikeThrough'></i></button>
+        <button><i class="fas fa-link" data-command='createLink'></i></button>
+        <button><i class="fas fa-list" data-command='insertUnorderedList'></i></button>
+        <button><i class="fas fa-list-ol" data-command='insertOrderedList'></i></button>
+        <button><i class="fas fa-align-left" data-command='justifyLeft'></i></button>
+        <button><i class="fas fa-align-right" data-command='justifyRight'></i></button>
+        <button><i class="fas fa-align-center" data-command='justifyCenter'></i></button>
+        <button><i class="fas fa-align-justify" data-command='justifyFull'></i></button>
+      </div>
+      <div id='text' contenteditable="true"></div>
+    </div>
+  </main>
+</body>
+</html>

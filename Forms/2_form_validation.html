@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Form Validation 2</title>
+    <meta charset="utf-8" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      h1 {
+        color: #fff;
+        font-size: 24px;
+        width: 800px;
+        margin: 70px auto 0 auto;
+      }
+      body {
+        background: teal;
+        font-size: 18px;
+      }
+
+      form {
+        width: 800px;
+        margin: 15px auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 4px;
+      }
+
+      dt {
+        padding: 20px 0 5px 0;
+      }
+
+      input {
+        font-size: 18px;
+        width: 300px;
+        height: 38px;
+        padding: 3px 10px;
+        outline: none;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
+
+      .credit {
+        width: 100px;
+      }
+
+      button {
+        margin-top: 20px;
+        font-size: 16px;
+        font-weight: bold;
+        outline: none;
+        color: #fff;
+        padding: 5px 15px;
+        border-radius: 4px;
+        background: salmon;
+        border: none;
+      }
+
+      span {
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
+
+      .valid {
+        border-color: yellowgreen;
+      }
+
+      .invalid {
+        color: red;
+        border-color: red;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      #form_submit_error {
+        background-color: white;
+        margin:auto;
+        width: 50%;
+        padding: 10px;
+      }
+
+    </style>
+    <script src="2_form_validation.js"></script>
+  </head>
+  <body>
+    <span id="form_submit_error" class="invalid hidden">
+      Fix errors before submitting this form.
+    </span>
+    <h1>Sign up Form</h1>
+    <form action="#" method="post" novalidate>
+      <fieldset>
+        <dl>
+          <dt>
+            <label for="first_name">First Name</label>
+          </dt>
+          <dd>
+            <input type="text" id="first_name" name="first_name" required>
+            <span></span>
+          </dd>
+
+          <dt>
+            <label for="last_name">Last Name</label>
+          </dt>
+          <dd>
+            <input type="text" id="last_name" name="last_name"  required>
+            <span></span>
+          </dd>
+
+          <dt>
+            <label for="email">Email</label>
+          </dt>
+
+          <dd>
+            <input type="text" required name="email" id="email"
+            placeholder="someone@example.com" pattern=".+@.+">
+            <span></span>
+          </dd>
+
+          <dt>
+            <label for="password">Password</label>
+          </dt>
+
+          <dd>
+            <input type="password" name="password" id="password" minlength=10 required>
+            <span></span>
+          </dd>
+
+          <dt>
+            <label for="credit">Credit Card Number:</label>
+          </dt>
+
+          <dd>
+            <input name="credit" class="credit" maxlength=4>
+            <input name="credit" class="credit" maxlength=4>
+            <input name="credit" class="credit" maxlength=4>
+            <input name="credit" class="credit" maxlength=4>
+            <br>
+            <span></span>
+          </dd>
+
+          <dt>
+            <label for="phone">Phone Number</label>
+          </dt>
+
+          <dd>
+            <input type="text" name="phone" id="phone" pattern="\d{3}-\d{3}-\d{4}"
+            placeholder="111-222-3333">
+            <span></span>
+            <br>
+            <small>ex: 123-456-7890</small>
+          </dd>
+
+          <button type="submit">Sign Up</button>
+        </dl>
+      </fieldset>
+    </form>
+  </body>
+</html>

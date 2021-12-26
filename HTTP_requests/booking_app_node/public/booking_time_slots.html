@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Time Slots (Exercise 4)</title>
+</head>
+<body>
+  <h1>Schedules</h1>
+  <form action="/api/bookings" method="POST" id="bookingForm">
+    <dl>
+      <dt>
+        <label for="id">Please select one schedule</label>
+        <select name="id" id="schedules" class="hidden"></select><span id="pleaseWait"></span>
+      </dt>
+
+      <dt>
+        <label for="student_email">Email:</label>
+        <input type="email" name="student_email" id="bookingFormEmail">
+      </dt>
+    </dl>
+    <input type="submit" value="Submit">
+  </form>
+
+  <div id="newStudent" class="hidden">
+    <h1>Please provide new student details</h1>
+    <form action="/api/students" method="POST" id="studentForm">
+      <dl>
+        <dt>
+          <label for="email">Email:</label>
+          <input type="email" name="email" id="studentFormEmail">
+        </dt>
+        <dt>
+          <label for="name">Name:</label>
+          <input type="text" name="name">
+        </dt>
+        <dt>
+          <label for="booking_sequence">Booking sequence:</label>
+          <input type="text" name="booking_sequence" id="bookingSequence" readonly>
+        </dt>
+      </dl>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+  <script src="bookingTimeSlots.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+body,
+html {
+  margin: 0;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  text-align: center;
+  margin: 0 auto;
+}
+
+h1 {
+  color: #f4f9e9;
+  background: #175676;
+  margin: 0;
+  padding: 20px 0;
+}
+select {
+  height: 30px;
+}
+
+button {
+  font-size: 18px;
+  height: 30px;
+}
+
+img {
+  height: 200px;
+  width: 300px;
+  display: block;
+  margin: auto;
+  margin-bottom: 10px;
+  background-size: contain;
+}
+
+#carContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.car {
+  margin: 10px;
+  padding: 10px;
+  background: #f4f9e9;
+  border: 6px solid #175676;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.buy {
+  background: 175676;
+  color: #153243;
+  cursor: pointer;
+}
+
+#selectorContainer {
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #f4f9e9;
+}
+
+#reset {
+  background: #f4f9e9;
+  color: #175676;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+#filter {
+  background: #175676;
+  color: white;
+}
+
+#filter:active,
+#reset:active {
+  background-color: white;
+}
+
+.hidden {
+  display: none;
+}

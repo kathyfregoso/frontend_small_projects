@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cancellations</title>
+  <style></style>
+</head>
+<body>
+  <script>
+    function cancelSchedules(scheduleId) {
+      let request = new XMLHttpRequest();
+      request.open('DELETE', `/api/schedules/${String(scheduleId)}`);
+      request.send();
+      request.addEventListener('load', () => {
+        if (request.status === 204) {
+          alert('Schedule deleted.')
+        } else {
+          alert(`Delete attempt failed: ${request.responseText}`)
+        }
+      })
+    }
+
+    function cancelBookings(bookingId) {
+      let request = new XMLHttpRequest();
+      request.open('PUT', `/api/schedules/${String(bookingId)}`);
+      request.send();
+      request.addEventListener('load', () => {
+        if (request.status === 204) {
+          alert('Booking cancelled.')
+        } else {
+          alert(`Cancellation failed: ${request.responseText}`)
+        }
+      })
+    }
+  </script>
+</body>
+</html>

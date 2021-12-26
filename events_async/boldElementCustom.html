@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Bold Element + Custom</title>
+    <style></style>
+  </head>
+  <body>
+    <section>Hello World</section>
+    <p>Greetings!</p>
+    <script>
+      function makeBold(element, custom) {
+        element.style.fontWeight = 'bold';
+
+        if (custom && typeof custom === 'function') {
+          custom(element)
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Schedules</title>
+  <style>
+    dl {
+        padding: 0.5em;
+    }
+    dt {
+        float: left;
+        clear: left;
+        width: 100px;
+        text-align: right;
+        font-weight: bold;
+        color: #f0595b;
+    }
+    dt::after {
+        content: ":";
+    }
+    dd {
+        margin: 0 0 0 110px;
+        padding: 0 0 0.5em 0;
+    }
+
+    input[type="submit"] {
+        display: inline-block;
+        margin-top: 15px;
+        color: #fff;
+        background: #f0595b;
+        border-color: #f0595b;
+        border-radius: 5px;
+        width: 100px;
+        height: 50px;
+    }
+
+    button {
+        display: inline-block;
+        margin-top: 15px;
+        color: #fff;
+        background: #5CAFDE;
+        border-color: #5CAFDE;
+        border-radius: 5px;
+        width: 100px;
+        height: 50px;
+    }
+   </style>
+</head>
+<body>
+  <button id="addSchedule">Add more schedules</button>
+  <form>
+    <fieldset name="Schedule 1">
+      <legend>Schedule 1</legend>
+      <dl>
+        <dt>
+          <label for="staff_id">Staff Name:</label>
+        </dt>
+        <dd>
+          <select name="staff_id">
+          </select>
+        </dd>
+        <dt>
+          <label for="date">Date:</label>
+        </dt>
+        <dd>
+          <input type="date" name="date" class='date'>
+        </dd>
+        <dt>
+          <label for="time">Time:</label>
+        </dt>
+        <dd>
+          <input type="time" name="time" class='time'>
+        </dd>
+      </dl>
+    </fieldset>
+    <input type="submit" id="submit">
+  </form>
+ 
+
+
+  <script src="add_schedules.js">
+  </script>
+</body>
+</html>

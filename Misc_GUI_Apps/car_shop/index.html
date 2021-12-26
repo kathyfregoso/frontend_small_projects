@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Used Cars For Sale</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js" integrity="sha512-zT3zHcFYbQwjHdKjCu6OMmETx8fJA9S7E6W7kBeFxultf75OPTYUJigEKX58qgyQMi1m1EgenfjMXlRZG8BXaw==" crossorigin="anonymous"></script>
+  <script src="app2.js"></script>
+  <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+<main>
+  <h1>Buy a Used Car</h1>
+  <div id="selectorContainer">
+    <script type="text/x-handlebars" id="selectorsTemplate">
+      <form action="#" method="post">
+        {{#each selectors}}
+          <select required name="{{@key}}" id="{{@key}}">
+            <option selected selected disabled>Select a {{@key}}</option>
+            <option>All</option>
+            {{#each this}}
+              <option>{{this}}</option>
+            {{/each}}
+          </select>
+        {{/each}}
+        <button id="filter">Filter</button>
+      </form>
+    </script>
+  </div>
+  <button id="reset">Reset</button>
+
+  <div id="carContainer">
+    <script type="text/x-handlebars" id="carTemplate">
+      <div class="car" data-id="{{id}}">
+          <img src="{{image}}" alt="{{make}} {{model}}" />
+          <span>{{make}}</span>
+          <span>{{model}}</span>
+          <p>${{price}}</p>
+          <p>{{year}}</p>
+          <button class="buy">Buy Now!</button>
+        </div>
+    </script>
+  </div>
+</main>
+</body>
+
+</html>

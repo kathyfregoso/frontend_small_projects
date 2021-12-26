@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Schedules (Exercise 3)</title>
+  <style>
+    dl {
+        border: 3px double #ccc;
+        padding: 0.5em;
+    }
+    dt {
+        float: left;
+        clear: left;
+        width: 100px;
+        text-align: right;
+        font-weight: bold;
+        color: #f0595b;
+    }
+    dt::after {
+        content: ":";
+    }
+    dd {
+        margin: 0 0 0 110px;
+        padding: 0 0 0.5em 0;
+    }
+
+    input[type="submit"] {
+        color: #fff;
+        background: #f0595b;
+        border-color: #f0595b;
+        border-radius: 5px;
+        width: 100px;
+        height: 50px;
+    }
+
+    button {
+      display: inline-block;
+      margin-top: 15px;
+      color: #fff;
+      background: #5CAFDE;
+      border-color: #5CAFDE;
+      border-radius: 5px;
+      width: 100px;
+      height: 50px;
+  }
+   </style>
+</head>
+<body>
+
+    <button class="addSchedule">Add more schedules</button>
+
+    <form action="/api/staff_members">
+      <dl>
+        <fieldset>
+          <legend>Schedule <span>1</span></legend>
+          <label>
+            Staff Name:
+            <select name="staff_id" id="">
+            </select>
+          </label>
+          <label>
+            Date:
+            <input type="date" name="date" placeholder="mm-dd-yy">
+          </label>
+          <label>
+            Time:
+            <input type="time" name="time" placeholder="hh:mm">
+          </label>
+        </fieldset>
+      </dl>
+    </form>
+
+    <button class="submit" type="submit">Submit</button>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', event => {
+      // request current staff list for options menu 
+      let selector = document.querySelector('select');
+      let request = new XMLHttpRequest;
+      request.open('GET', '/api/staff_members');
+      request.responseType = 'json';
+
+      // add staff options list menu
+      request.addEventListener('load', event => {
+        request.response.forEach(staff => {
+          let staffOption = new Option(staff['name'], staff['id']);
+          selector.appendChild(staffOption);
+        })
+      })
+
+      request.send();
+
+      // add new forms to add multiple schedules
+      let addScheduleBtn = document.querySelector('.addSchedule');
+      let form = document.querySelector('form');
+      let formCount = 1;
+      let submitBtn = document.querySelector('.submit');
+
+      addScheduleBtn.addEventListener('click', event => {
+        let newForm = form.cloneNode(true);
+        formCount += 1;
+        newForm.querySelector('span').textContent = String(formCount);
+
+        submitBtn.before(newForm);
+      })
+
+      // serialize form data
+      submitBtn.addEventListener('click', event => {
+        let allForms = document.querySelectorAll('form');
+        let schedules = Array.from(allForms, (form) => {
+          let formData = new FormData(form);
+          let result = {};
+
+          formData.forEach((value, key) => result[key] = value);
+          
+          result.staff_id = Number(result.staff_id);
+          return result;
+        });
+
+        // make POST request/submit form data
+        let request = new XMLHttpRequest();
+        request.open('POST', '/api/schedules');
+        request.setRequestHeader('Content-Type', 'application/json');
+
+        request.addEventListener('load', event => {
+          if (request.status === 201) {
+            alert(`Schedules added`);
+            [...allForms].forEach(form => form.reset());
+          } else if (request.status === 400) {
+            alert(request.responseText);
+          }
+        })
+
+        request.send(JSON.stringify({schedules}));
+      })
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Nodes to Array</title>
+    <script>
+
+
+      function nodesToArr(element = document.body) {
+        return [element.tagName, [...element.children].map(nodesToArr)];
+      }
+      
+
+
+    </script>
+  </head>
+  <body>
+    <header id="1"></header>
+    <main id="2"></main>
+    <footer id="3"></footer>
+  </body>
+</html>
